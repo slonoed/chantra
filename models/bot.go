@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"bitbucket.org/slonoed/chntr/state"
+	"github.com/slonoed/chantra/state"
 
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

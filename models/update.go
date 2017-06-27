@@ -4,7 +4,7 @@ import (
 	"errors"
 	"log"
 
-	"bitbucket.org/slonoed/chntr/state"
+	"github.com/slonoed/chantra/state"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

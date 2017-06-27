@@ -1,7 +1,7 @@
 package models
 
 import (
-	"bitbucket.org/slonoed/chntr/state"
+	"github.com/slonoed/chantra/state"
 	"gopkg.in/mgo.v2/bson"
 	tg "gopkg.in/telegram-bot-api.v4"
 )

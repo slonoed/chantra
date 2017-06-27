@@ -13,9 +13,9 @@ import (
 
 	mgo "gopkg.in/mgo.v2"
 
-	h "bitbucket.org/slonoed/chntr/handlers"
-	"bitbucket.org/slonoed/chntr/models"
-	"bitbucket.org/slonoed/chntr/state"
+	h "github.com/slonoed/chantra/handlers"
+	"github.com/slonoed/chantra/models"
+	"github.com/slonoed/chantra/state"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/kidstuff/mongostore"

@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"bitbucket.org/slonoed/chntr/models"
-	"bitbucket.org/slonoed/chntr/state"
+	"github.com/slonoed/chantra/models"
+	"github.com/slonoed/chantra/state"
 )
 
 type botInput struct {
