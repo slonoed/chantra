@@ -1,0 +1,85 @@
+memo = "5888f3f00be99f58a06175c9cdf69cfcaf2d9cfdf93f25797f16134bc0f8bcae"
+
+[[projects]]
+  branch = "master"
+  name = "cloud.google.com/go"
+  packages = ["compute/metadata"]
+  revision = "7050ae8919c454e5119ddeb65c678014a52e5d57"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  revision = "fec3b39b059c0f88fa6b20f5ed012b1aa203a8b4"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/context"
+  packages = ["."]
+  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/handlers"
+  packages = ["."]
+  revision = "13d73096a474cac93275c679c7b8a2dc17ddba82"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/mux"
+  packages = ["."]
+  revision = "4c1c3952b7d9d0a061a3fa7b36fd373ba0398ebc"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/securecookie"
+  packages = ["."]
+  revision = "e59506cc896acb7f7bf732d4fdf5e25f7ccd8983"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/gorilla/sessions"
+  packages = ["."]
+  revision = "8b6b4cd75f07f7ee036eb37b8127bd40ab1efc49"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/kidstuff/mongostore"
+  packages = ["."]
+  revision = "256d65ac5b0e35e7c5ebb3f175c0bed1e5c2b253"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/technoweenie/multipartstreamer"
+  packages = ["."]
+  revision = "a90a01d73ae432e2611d178c18367fbaa13e0154"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context","context/ctxhttp"]
+  revision = "84f0e6f92b10139f986b1756e149a7d9de270cdc"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/oauth2"
+  packages = [".","google","internal","jws","jwt"]
+  revision = "ad516a297a9f2a74ecc244861b298c94bdd28b9d"
+
+[[projects]]
+  name = "google.golang.org/appengine"
+  packages = [".","internal","internal/app_identity","internal/base","internal/datastore","internal/log","internal/modules","internal/remote_api","internal/urlfetch","urlfetch"]
+  revision = "150dc57a1b433e64154302bdc40b6bb8aefa313a"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "v2"
+  name = "gopkg.in/mgo.v2"
+  packages = [".","bson","internal/json","internal/sasl","internal/scram"]
+  revision = "3f83fa5005286a7fe593b055f0d7771a7dce4655"
+
+[[projects]]
+  branch = "master"
+  name = "gopkg.in/telegram-bot-api.v4"
+  packages = ["."]
+  revision = "0a57807db79efce7f6719fbb2c0e0f83fda79aec"

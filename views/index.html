@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chantra</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/react-datepicker.min.css">
+  <style>
+    html {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  {{ if .User }}
+    <div id="app"></div>
+
+    <script src="/static/babel.min.js"></script>
+    <script src="/static/react.min.js"></script>
+    <script src="/static/react-dom.min.js"></script>
+    <script src="/static/moment.min.js"></script>
+    <script src="/static/onClickOutside.js"></script>
+    <script src="/static/react-datepicker.js"></script>
+    <script>
+      (function() {
+        var d = {{ .JSON }};
+        window.INITIAL_DATA = JSON.parse(d);
+      })()
+    </script>
+    <script type="text/babel" src="/static/components/MessageForm.js"></script>
+    <script type="text/babel" src="/static/components/FeedbackForm.js"></script>
+    <script type="text/babel" src="/static/app.js"></script>
+  {{ else }}
+    <div class="container">
+      <div class="row col-xs-12 text-center">
+        <h1>You don't know me</h1>
+        <a href="/auth/google" class="btn btn-primary">Login with Google</a>
+        <br/>
+        <br/>
+        <img src="/static/ydnm.jpg" alt="">
+      </div>
+    </div>
+  {{ end }}
+</body>
+</html>
