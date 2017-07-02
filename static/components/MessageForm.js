@@ -32,14 +32,8 @@ class MessageForm extends React.Component {
     this.setState({ sentDate: date });
   }
   onChannelSelect(e) {
-    const channel = channels.find(c => c.id == e.target.value);
     this.setState({
       channelId: e.target.value.id,
-    });
-  }
-  onChannelSelect(e) {
-    this.setState({
-      botId: e.target.value
     });
   }
   renderChannel(channel) {
