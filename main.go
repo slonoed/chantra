@@ -13,12 +13,12 @@ import (
 
 	mgo "gopkg.in/mgo.v2"
 
-	h "github.com/slonoed/chantra/handlers"
-	"github.com/slonoed/chantra/models"
-	"github.com/slonoed/chantra/state"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/kidstuff/mongostore"
+	h "github.com/slonoed/chantra/handlers"
+	"github.com/slonoed/chantra/models"
+	"github.com/slonoed/chantra/state"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 )
@@ -68,6 +68,7 @@ func main() {
 	r.Handle("/api/addBot", apiMiddleware(appState, state.AppHandler{appState, h.AddBot}))
 	r.Handle("/api/listBots", apiMiddleware(appState, state.AppHandler{appState, h.ListBots}))
 	r.Handle("/api/addPost", apiMiddleware(appState, state.AppHandler{appState, h.AddPost}))
+	r.Handle("/api/addChannel", apiMiddleware(appState, state.AppHandler{appState, h.AddChannel}))
 
 	r.PathPrefix("/").Handler(state.AppHandler{appState, handleIndex})
 
@@ -164,7 +165,7 @@ func handleIndex(app *state.AppState, w http.ResponseWriter, r *http.Request) {
 		channels = []models.Channel{}
 	}
 
-	posts, err := models.GetPostsForBots(app, bots)
+	posts, err := models.GetPostsForChannels(app, channels)
 	if err != nil {
 		posts = []models.Post{}
 	}

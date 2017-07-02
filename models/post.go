@@ -21,8 +21,7 @@ type Answer struct {
 // Post represents post in database
 type Post struct {
 	ID               bson.ObjectId `json:"id" bson:"_id,omitempty"`
-	TgChannelID      int64         `json:"tgChannelId"`
-	BotID            bson.ObjectId `json:"botId" bson:"botId"`
+	ChannelID        bson.ObjectId `json:"channel_id"`
 	IsSent           bool          `json:"isSent" bson:"isSent"`
 	SentDate         Timestamp     `json:"sentDate" bson:"sentDate"`
 	Text             string        `json:"text"`
@@ -54,7 +53,12 @@ func (post *Post) Send(app *state.AppState) error {
 	session := app.MgoSession.Clone()
 	defer session.Close()
 
-	bot, err := GetBotById(app, post.BotID.Hex())
+	channel, err := GetChannelByID(app, post.ChannelID)
+	if err != nil {
+		return err
+	}
+
+	bot, err := GetBotById(app, channel.BotID.Hex())
 	if err != nil {
 		return err
 	}
@@ -79,7 +83,7 @@ func (post *Post) Send(app *state.AppState) error {
 		return nil
 	}
 
-	msg := tg.NewMessage(post.TgChannelID, post.Text)
+	msg := tg.NewMessage(channel.Chat.ID, post.Text)
 	msg.ReplyMarkup = post.BuildReplyMarkup()
 	msg.DisableNotification = !post.WithNotification
 	msg.DisableWebPagePreview = !post.WithPreview
@@ -141,19 +145,20 @@ func (post *Post) AddVote(app *state.AppState, index int) error {
 	return nil
 }
 
-// GetPostsForBots returns list of posts (uniq) for list of bots
-func GetPostsForBots(app *state.AppState, bots []Bot) ([]Post, error) {
+// GetPostsForChannels returns list of posts for list of channels
+func GetPostsForChannels(app *state.AppState, channels []Channel) ([]Post, error) {
 	// collect bots ids
-	ids := []bson.ObjectId{}
-	for _, bot := range bots {
-		ids = append(ids, bot.ID)
+	var ids []bson.ObjectId
+	for _, channel := range channels {
+		ids = append(ids, channel.ID)
 	}
 	session := app.CloneSession()
 	defer session.Close()
 
 	var posts []Post
-	query := bson.M{"botId": bson.M{"$in": ids}}
+	query := bson.M{"channel_id": bson.M{"$in": ids}}
 	if err := session.DB(dbName).C("posts").Find(query).All(&posts); err != nil {
+		log.Println(err)
 		return nil, err
 	}
 	return posts, nil

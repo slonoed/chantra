@@ -38,7 +38,16 @@ func AddPost(app *state.AppState, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	bot, err := models.GetBotById(app, post.BotID.Hex())
+	fmt.Println("Whut", post.ChannelID)
+	channel, err := models.GetChannelByID(app, post.ChannelID)
+	fmt.Println(err)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprintf(w, `{"ok": false, "error": "Server error"}`)
+		return
+	}
+
+	bot, err := models.GetBotById(app, channel.BotID.Hex())
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		fmt.Fprintf(w, `{"ok": false, "error": "No bot"}`)

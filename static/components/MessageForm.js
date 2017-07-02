@@ -1,10 +1,10 @@
 class MessageForm extends React.Component {
   constructor(props) {
     super(props);
-    const { channels, bots } = props;
+    const { channels} = props;
     this.state = {
       channelId: channels[0].id,
-      botId: channels.length ? channels[0].bots[0] : null,
+      botId: null,
       sentDate: moment(),
       feedback: null
     };
@@ -17,8 +17,7 @@ class MessageForm extends React.Component {
     date.hours(hours);
     date.minutes(minutes);
     this.props.onAdd({
-      tgChannelId: parseInt(this.state.channelId),
-      botId: this.state.botId,
+      channel_id: this.state.channelId,
       sentDate: date,
       text: this.text.value,
       parseMode: this.md.checked ? 'Markdown' : '',
@@ -36,7 +35,6 @@ class MessageForm extends React.Component {
     const channel = channels.find(c => c.id == e.target.value);
     this.setState({
       channelId: e.target.value.id,
-      botId: channel.bots[0]
     });
   }
   onChannelSelect(e) {
@@ -53,10 +51,9 @@ class MessageForm extends React.Component {
     return <option value={bot.id}>{bot.firstName} (@{bot.username})</option>;
   }
   render() {
-    const { channels, bots } = this.props;
-    const { channelId, botId, sentDate, feedback } = this.state;
+    const { channels} = this.props;
+    const { channelId, sentDate, feedback } = this.state;
     const channel = channels.find(c => c.id === channelId);
-    const cBots = bots.filter(b => channel.bots.includes(b.id));
     const hours = moment().hours();
     const minutes = moment().minutes();
 
@@ -85,19 +82,6 @@ class MessageForm extends React.Component {
                 onChange={e => this.onChannelSelect(e)}
               >
                 {channels.map(c => this.renderChannel(c))}
-              </select>
-            </div>
-          </div>
-          <div className="col-xs-12 col-md-6">
-            <div className="form-group">
-              <label htmlFor="bot">Bot</label>
-              <select
-                className="form-control"
-                id="bot"
-                value={botId}
-                onChane={e => this.onBotSelect(e)}
-              >
-                {cBots.map(c => this.renderBot(c))}
               </select>
             </div>
           </div>

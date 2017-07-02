@@ -1,6 +1,8 @@
 package models
 
 import (
+	"log"
+
 	"github.com/slonoed/chantra/state"
 	"gopkg.in/mgo.v2/bson"
 	tg "gopkg.in/telegram-bot-api.v4"
@@ -9,12 +11,30 @@ import (
 // Channel represents channel chat in mongo
 type Channel struct {
 	tg.Chat
-	Bots []bson.ObjectId `bson:"bots" json:"bots"`
+	ID    bson.ObjectId `json:"id" bson:"_id,omitempty"`
+	BotID bson.ObjectId `bson:"botId" json:"botId"`
 }
 
-// GetChannelsForBots returns list of channel (uniq) for list of bots
+// CreateChannel for bot
+func CreateChannel(app *state.AppState, chat tg.Chat, botID bson.ObjectId) (*Channel, error) {
+	channel := &Channel{
+		Chat:  chat,
+		BotID: botID,
+	}
+	session := app.CloneSession()
+	defer session.Close()
+
+	err := session.DB(dbName).C("channels").Insert(channel)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	return channel, err
+}
+
+// GetChannelsForBots returns list of channel for list of bots
 func GetChannelsForBots(app *state.AppState, bots []Bot) ([]Channel, error) {
-	// collect bots ids
 	ids := []bson.ObjectId{}
 	for _, bot := range bots {
 		ids = append(ids, bot.ID)
@@ -22,40 +42,40 @@ func GetChannelsForBots(app *state.AppState, bots []Bot) ([]Channel, error) {
 	session := app.MgoSession.Clone()
 	defer session.Close()
 
-	// query all updates from db
-	var updates []Update
-	// TODO move to updates?
-	err := session.DB(dbName).C("updates").Find(bson.M{"botId": bson.M{"$in": ids}}).All(&updates)
+	var channels []Channel
+
+	err := session.DB(dbName).C("channels").Find(bson.M{"botId": bson.M{"$in": ids}}).All(&channels)
 	if err != nil {
-		return nil, err
+		log.Println(err)
 	}
 
-	// collect uniq channels, if find duplicate, add bot id
-	channels := make(map[int64]Channel) // channel id -> channel
-	for _, update := range updates {
-		post := update.ChannelPost
-		if post == nil {
-			continue
-		}
-		chat := post.Chat
-		if chat == nil {
-			continue
-		}
+	return channels, err
+}
 
-		channel, exist := channels[chat.ID]
-		if exist {
-			channel.Bots = append(channel.Bots, update.BotID)
-		} else {
-			channel = Channel{*chat, []bson.ObjectId{update.BotID}}
-			channels[chat.ID] = channel
-		}
+func GetChannelByID(app *state.AppState, channelID bson.ObjectId) (*Channel, error) {
+	session := app.MgoSession.Clone()
+	defer session.Close()
+
+	var channel Channel
+
+	err := session.DB(dbName).C("channels").FindId(channelID).One(&channel)
+	if err != nil {
+		log.Println(err)
 	}
 
-	// convert map to slice
-	list := make([]Channel, 0, len(channels))
-	for _, channel := range channels {
-		list = append(list, channel)
+	return &channel, err
+}
+
+func GetChannelByTelegramID(app *state.AppState, channelID int64) (*Channel, error) {
+	session := app.MgoSession.Clone()
+	defer session.Close()
+
+	var channel Channel
+
+	err := session.DB(dbName).C("channels").Find(bson.M{"id": channelID}).One(&channel)
+	if err != nil {
+		log.Println(err)
 	}
 
-	return list, nil
+	return &channel, err
 }
