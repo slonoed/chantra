@@ -83,7 +83,7 @@ class MessageForm extends React.Component {
         <div className="form-group">
           <label htmlFor="text">Text</label>&nbsp;
           <label>
-            <input type="checkbox" ref={i => this.md = i}/> Use markdown
+            <input type="checkbox" defaultChecked  ref={i => this.md = i}/> Use markdown
           </label>
           <textarea className="form-control" id="" name="" rows="10"
               ref={i => this.text = i} />
@@ -97,7 +97,7 @@ class MessageForm extends React.Component {
           </div>
           <div className="checkbox">
             <label>
-              <input type="checkbox" ref={i => this.disableWebPagePreview = i}/>
+              <input type="checkbox" defaultChecked  ref={i => this.disableWebPagePreview = i}/>
               Disable web page preview
             </label>
           </div>
