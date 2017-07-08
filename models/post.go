@@ -21,7 +21,7 @@ type Answer struct {
 // Post represents post in database
 type Post struct {
 	ID               bson.ObjectId `json:"id" bson:"_id,omitempty"`
-	ChannelID        bson.ObjectId `json:"channel_id"`
+	ChannelID        bson.ObjectId `json:"channel_id" bson:"channelid"`
 	IsSent           bool          `json:"isSent" bson:"isSent"`
 	SentDate         Timestamp     `json:"sentDate" bson:"sentDate"`
 	Text             string        `json:"text"`
@@ -156,7 +156,7 @@ func GetPostsForChannels(app *state.AppState, channels []Channel) ([]Post, error
 	defer session.Close()
 
 	var posts []Post
-	query := bson.M{"channel_id": bson.M{"$in": ids}}
+	query := bson.M{"channelid": bson.M{"$in": ids}}
 	if err := session.DB(dbName).C("posts").Find(query).All(&posts); err != nil {
 		log.Println(err)
 		return nil, err

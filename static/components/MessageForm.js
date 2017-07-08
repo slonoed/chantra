@@ -1,13 +1,32 @@
 class MessageForm extends React.Component {
   constructor(props) {
     super(props);
-    const { channels} = props;
+
+    let settings = {}
+    try {
+      const settingsData = localStorage.getItem('messageFormSettings')
+      settings = JSON.parse(settingsData) || {}
+    } catch(e) {}
+
     this.state = {
-      channelId: channels[0].id,
       botId: null,
       sentDate: moment(),
-      feedback: null
+      feedback: null,
+      useMarkdown: Boolean(settings.useMarkdown)
     };
+  }
+  onMdChange(e) {
+    const useMarkdown = e.target.checked
+    this.setState({
+      useMarkdown
+    })
+
+    const settings = { useMarkdown }
+    try {
+      const settingsData = JSON.stringify(settings)
+      localStorage.setItem('messageFormSettings', settingsData)
+    } catch(e) {}
+
   }
   onSubmit(e) {
     e.preventDefault();
@@ -17,10 +36,9 @@ class MessageForm extends React.Component {
     date.hours(hours);
     date.minutes(minutes);
     this.props.onAdd({
-      channel_id: this.state.channelId,
       sentDate: date,
       text: this.text.value,
-      parseMode: this.md.checked ? 'Markdown' : '',
+      parseMode: this.state.useMarkdown ? 'Markdown' : '',
       withPotification: !this.disableNotification.checked,
       withPreview: !this.disableWebPagePreview.checked,
       answers: this.state.feedback ? this.state.feedback.map(a => ({
@@ -31,23 +49,11 @@ class MessageForm extends React.Component {
   onDateChange(date) {
     this.setState({ sentDate: date });
   }
-  onChannelSelect(e) {
-    this.setState({
-      channelId: e.target.value.id,
-    });
-  }
-  renderChannel(channel) {
-    return (
-      <option value={channel.id}>{channel.title} (@{channel.username})</option>
-    );
-  }
   renderBot(bot) {
     return <option value={bot.id}>{bot.firstName} (@{bot.username})</option>;
   }
   render() {
-    const { channels} = this.props;
-    const { channelId, sentDate, feedback } = this.state;
-    const channel = channels.find(c => c.id === channelId);
+    const {sentDate, feedback, useMarkdown} = this.state;
     const hours = moment().hours();
     const minutes = moment().minutes();
 
@@ -65,25 +71,11 @@ class MessageForm extends React.Component {
 
     return (
       <form onSubmit={e => this.onSubmit(e)} className="form">
-        <div className="row">
-          <div className="col-xs-12 col-md-6">
-            <div className="form-group">
-              <label htmlFor="channel">Channel</label>
-              <select
-                className="form-control"
-                id="channel"
-                value={channelId}
-                onChange={e => this.onChannelSelect(e)}
-              >
-                {channels.map(c => this.renderChannel(c))}
-              </select>
-            </div>
-          </div>
-        </div>
         <div className="form-group">
           <label htmlFor="text">Text</label>&nbsp;
           <label>
-            <input type="checkbox" defaultChecked  ref={i => this.md = i}/> Use markdown
+            <input type="checkbox" checked={useMarkdown}
+              onChange={e => this.onMdChange(e)}/> Use markdown
           </label>
           <textarea className="form-control" id="" name="" rows="10"
               ref={i => this.text = i} />

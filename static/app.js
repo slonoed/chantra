@@ -21,9 +21,6 @@ class Navbar extends React.Component {
             <li>
               <Link route="channels">Channels</Link>
             </li>
-            <li>
-              <Link route="messages">Messages</Link>
-            </li>
           </ul>
           <p className="navbar-text navbar-right">
             <a href="/auth/logout" className="navbar-link">Logout</a>
@@ -146,6 +143,13 @@ class ChannelsPage extends React.Component {
   onBotSelect(e) {
     this.setState({botId: e.target.value})
   }
+  renderChannelLink(channel) {
+    const link = `/channels/${channel.id}`
+    const style = {
+      display: 'block'
+    }
+    return <a href={link} style={style}>{channel.title}</a>
+  }
   renderBot(bot) {
     return <option value={bot.id}>{bot.firstName} (@{bot.username})</option>;
   }
@@ -187,79 +191,11 @@ class ChannelsPage extends React.Component {
 
       </form>
       <hr/>
-      {channels.map(c => (<div>{c.title} - {c.username}</div>))}
+      {channels.map(c => this.renderChannelLink(c))}
     </div>
   }
 }
-class MessagesPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bots: INITIAL_DATA.bots || [],
-      posts: INITIAL_DATA.posts || [],
-      channels: INITIAL_DATA.channels || []
-    };
-  }
-  onMessageAdd(message) {
-    const content = Object.assign(message, {
-      sentDate: message.sentDate.unix()
-    });
-    fetch('/api/addPost', {
-      method: 'POST',
-      body: JSON.stringify(content),
-      credentials: 'include'
-    })
-    .then(r => r.json())
-    .then(r => {
-      if (!r.ok) {
-        throw new Error(r.error || 'Unknown error');
-      }
-    })
-    .catch(e => {
-      alert(e.toString());
-    });
-  }
-  renderAnswer(a) {
-    return <div>
-      {a.text} — {a.votes}
-    </div>;
-  }
-  renderPost(post) {
-    const date = moment.unix(post.sentDate).format('YYYY-MM-DD HH:mm');
-    return <div className="panel panel-default" key={post.id}>
-      <div className="panel-heading">
-        {date}
-      </div>
-      <div className="panel-body">
-        {post.text}
-        <hr/>
-        {post.answers.map(a => this.renderAnswer(a))}
-      </div>
-    </div>;
-  }
-  render() {
-    const { bots, channels, posts } = this.state;
-    const hasChannels = channels.length > 0;
-    const byDate = (b, a) => a.sentDate - b.sentDate;
-    // TODO if no channels don't render form
-    return (
-      <div className="row">
-        <div className="col-xs-12 col-md-6">
-          {hasChannels &&
-            <MessageForm
-              bots={bots}
-              channels={channels}
-              onAdd={m => this.onMessageAdd(m)}
-            />}
-          {hasChannels || <div>No channels to send message</div>}
-        </div>
-        <div className="col-xs-12 col-md-6">
-          {posts.sort(byDate).map(p => this.renderPost(p))}
-        </div>
-      </div>
-    );
-  }
-}
+
 class NotFoundPage extends React.Component {
   render() {
     return <div>NotFound page</div>;
@@ -268,12 +204,21 @@ class NotFoundPage extends React.Component {
 
 class App extends React.Component {
   render() {
-    let Page = {
-      "/": MessagesPage,
-      "/bots": BotsPage,
-      "/channels": ChannelsPage,
-      "/messages": MessagesPage
-    }[location.pathname];
+    let Page = NotFoundPage;
+    let channelId = null
+    // for channels page
+    const match = /\/channels\/([a-z0-9]+)/.exec(location.pathname)
+    if (match && match[1]) {
+      channelId = match[1]
+      Page = ChannelPage
+    } else {
+      Page = {
+        "/bots": BotsPage,
+        "/channels": ChannelsPage,
+        "/": ChannelsPage,
+      }[location.pathname];
+    }
+
     if (!Page) {
       Page = NotFoundPage;
     }
@@ -282,7 +227,7 @@ class App extends React.Component {
       <div>
         <Navbar />
         <div className="container">
-          <Page />
+          <Page channelId={channelId}/>
         </div>
       </div>
     );
