@@ -36,6 +36,7 @@ class ChannelPage extends React.Component {
     const channel = channels.find(c => c.id === channelId)
     const {title} = channel
     const filteredPosts = posts.filter(p => p.channel_id === channelId)
+    const byDate = (b, a) => a.sentDate - b.sentDate;
     return <div>
       <h2>{title}</h2>
       <MessageForm
@@ -44,7 +45,7 @@ class ChannelPage extends React.Component {
       />
       <hr/>
       <h2>Posts</h2>
-      {filteredPosts.map(p => <Post post={p}/>)}
+      {filteredPosts.sort(byDate).map(p => <Post post={p}/>)}
     </div>
   }
 }
