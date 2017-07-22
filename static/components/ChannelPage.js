@@ -7,11 +7,11 @@ class ChannelPage extends React.Component {
   }
   onMessageAdd(message) {
    const {posts} = this.state
-    const content = Object.assign(message, {
+   const content = Object.assign(message, {
       sentDate: message.sentDate.unix(),
       channel_id: this.props.channelId
     
-    })
+  })
     fetch('/api/addPost', {
       method: 'POST',
       body: JSON.stringify(content),
@@ -25,7 +25,7 @@ class ChannelPage extends React.Component {
      else {
       const newPosts = posts.concat(r.post);
       this.setState({ posts: newPosts });
-      {window.alert("сообщение отправлено")};
+      window.alert("сообщение отправлено");
       }
     })
     .catch(e => {
@@ -50,7 +50,7 @@ class ChannelPage extends React.Component {
       />
      <hr/>
       <h2>Posts</h2>
-        {filteredPosts.sort(byDate).map(p => <PostBlock post={p}/>)}
+      {filteredPosts.sort(byDate).map(p => <PostBlock post={p}/>)}
     </div>
   }
 }

@@ -5,7 +5,7 @@ render() {
  return <div className="panel">
    <b>{date}</b>
    <p>{text}</p>
-      <hr/>
+    <hr/>
    </div>
   }
 }
