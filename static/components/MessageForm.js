@@ -1,3 +1,4 @@
+
 class MessageForm extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +29,7 @@ class MessageForm extends React.Component {
     } catch(e) {}
 
   }
+  
   onSubmit(e) {
     e.preventDefault();
     const date = moment(this.state.sentDate);
@@ -56,13 +58,12 @@ class MessageForm extends React.Component {
     const {sentDate, feedback, useMarkdown} = this.state;
     const hours = moment().hours();
     const minutes = moment().minutes();
-
     const feedbackEl = feedback == null
       ? <button
           className="btn btn-link"
           onClick={() => this.setState({ feedback: [] })}
         >
-          + Add feedback
+          + Add feedbacks
         </button>
       : <FeedbackForm
           items={feedback}
@@ -132,7 +133,7 @@ class MessageForm extends React.Component {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" >
           Schedule message
         </button>
       </form>
