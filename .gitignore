@@ -4,3 +4,4 @@ static/app.js
 static/app.js.map
 docker-compose.yml
 node_modules
+package-lock.json
