@@ -1,0 +1,39 @@
+{
+  "name": "chantra",
+  "version": "1.0.0",
+  "description": "TBD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node dev.js",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slonoed/chantra.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slonoed/chantra/issues"
+  },
+  "homepage": "https://github.com/slonoed/chantra#readme",
+  "dependencies": {
+    "moment": "^2.18.1",
+    "react": "^15.6.1",
+    "react-datepicker": "^0.52.0",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-babili": "^0.1.4",
+    "babel-preset-react": "^6.24.1",
+    "babili-webpack-plugin": "^0.1.2",
+    "loglevel": "^1.4.1",
+    "prettier": "^1.5.3",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.6.0"
+  }
+}

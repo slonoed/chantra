@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "react"
+  ],
+  "plugins": [
+    "react-hot-loader/babel"
+  ],
+  "env": {
+    "production": {
+      "presets": ["babili"]
+    }
+  }
+}

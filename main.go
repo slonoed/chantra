@@ -47,12 +47,18 @@ func main() {
 		Scopes:       []string{"profile", "email"},
 		Endpoint:     google.Endpoint,
 	}
+
+	env := state.EnvProd
+	if os.Getenv("GO_ENV") == "development" {
+		env = state.EnvDev
+	}
 	appState := &state.AppState{
 		MgoSession:   ms,
 		SessionStore: store,
 		Templates:    templates,
 		OauthConfig:  googleOauthConfig,
 		Done:         make(chan struct{}),
+		Env:          env,
 	}
 
 	r := mux.NewRouter()
@@ -141,6 +147,7 @@ type initialData struct {
 type PageData struct {
 	User *models.User `json:"user"`
 	JSON string       `json:"json"`
+	Env  string       `json:"env"`
 }
 
 func handleIndex(app *state.AppState, w http.ResponseWriter, r *http.Request) {
@@ -175,9 +182,9 @@ func handleIndex(app *state.AppState, w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	data := PageData{user, string(initial)}
+
+	data := PageData{user, string(initial), app.Env}
 	t, _ := template.ParseFiles("views/index.html")
-	fmt.Println(data.JSON)
 	t.Execute(w, data)
 }
 

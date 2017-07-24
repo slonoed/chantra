@@ -1,4 +1,8 @@
-class Post extends React.Component {
+import {Component} from 'react'
+import moment from 'moment'
+import MessageForm from './MessageForm'
+
+class Post extends Component {
   render() {
     const {sentDate, text} = this.props.post
     const date = moment.unix(sentDate).format('YYYY-MM-DD HH:mm');
@@ -9,7 +13,7 @@ class Post extends React.Component {
     </div>
   }
 }
-class ChannelPage extends React.Component {
+export default class ChannelPage extends Component {
   onMessageAdd(message) {
     const content = Object.assign(message, {
       sentDate: message.sentDate.unix(),

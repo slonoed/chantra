@@ -1,4 +1,5 @@
-class FeedbackForm extends React.Component {
+import {Component} from 'react'
+export default class FeedbackForm extends Component {
   constructor(props) {
     super(props);
     bind(this, 'renderItem');

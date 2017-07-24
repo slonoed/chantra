@@ -9,6 +9,9 @@ import (
 	mgo "gopkg.in/mgo.v2"
 )
 
+const EnvDev = "development"
+const EnvProd = "production"
+
 // AppState contains all current state of app
 type AppState struct {
 	MgoSession   *mgo.Session
@@ -16,6 +19,7 @@ type AppState struct {
 	Templates    map[string]*template.Template
 	OauthConfig  *oauth2.Config
 	Done         chan struct{}
+	Env          string
 }
 
 // AppHandler incapsulates http handler + app state
