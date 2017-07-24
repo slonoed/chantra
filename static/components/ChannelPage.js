@@ -2,7 +2,7 @@ class Alert extends React.Component {
   render() {
     return (
     <div className="alert alert-success" role="alert">
-      <p>Done!</p>
+      <h1>Done!</h1>
     </div>  
     ); 
   }
@@ -54,12 +54,12 @@ class ChannelPage extends React.Component {
     const {title} = channel
       return (
       <div>
-        {showMe && <Alert/>}
         <h2>{title}</h2>
         <MessageForm
         bots={bots}
         onAdd={m => this.onMessageAdd(m)}
         />
+        {showMe && <Alert/>}
         <hr/>
         <h2>Posts</h2>
         {filteredPosts.sort(byDate).map(p => <PostBlock post={p}/>)}
