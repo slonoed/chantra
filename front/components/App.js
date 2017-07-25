@@ -5,10 +5,11 @@ import FeedbackForm from "./FeedbackForm";
 class Link extends Component {
   render() {
     const { route, children } = this.props;
-    const href = "/" + route;
+    const href = "/" +
+      route;
 
     return (
-      <a href={href}>
+      <a href={href:href}>
         {children}
       </a>
     );
