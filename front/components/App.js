@@ -6,7 +6,7 @@ class Link extends Component {
   render() {
     const { route, children } = this.props;
     const href = "/" +
-      route;
+       route;
 
     return (
       <a href={href:href}>
