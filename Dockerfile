@@ -8,8 +8,6 @@ WORKDIR /go/src/github.com/slonoed/chantra
 RUN go build
 RUN go install
 
-RUN npm run build
-
 EXPOSE 3000
 
 CMD ["chantra"]
