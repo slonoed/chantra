@@ -1,18 +1,17 @@
-import { Component } from "react";
-import ChannelPage from "./ChannelPage";
-import FeedbackForm from "./FeedbackForm";
+import {Component} from 'react'
+import ChannelPage from './ChannelPage'
+import FeedbackForm from './FeedbackForm'
 
 class Link extends Component {
   render() {
-    const { route, children } = this.props;
-    const href = "/" +
-        route;
+    const {route, children} = this.props
+    const href = '/' + route
 
     return (
-      <a href={href:href}>
+      <a href={href}>
         {children}
       </a>
-    );
+    )
   }
 }
 
@@ -36,39 +35,39 @@ class Navbar extends Component {
           </p>
         </div>
       </nav>
-    );
+    )
   }
 }
 
 class BotsPage extends Component {
   constructor(props) {
-    super(props);
-    this.fieldId = "bots-page-form-input-" + Math.floor(Math.random() * 100000);
+    super(props)
+    this.fieldId = 'bots-page-form-input-' + Math.floor(Math.random() * 100000)
     this.state = {
       bots: INITIAL_DATA.bots || [],
-      loading: false
-    };
+      loading: false,
+    }
   }
   onSubmit(e) {
-    e.preventDefault();
-    const token = this.tokenInput.value;
-    this.tokenInput.value = "";
-    this.setState({ loading: true });
-    fetch("/api/addBot", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({ token })
+    e.preventDefault()
+    const token = this.tokenInput.value
+    this.tokenInput.value = ''
+    this.setState({loading: true})
+    fetch('/api/addBot', {
+      method: 'POST',
+      credentials: 'include',
+      body: JSON.stringify({token}),
     })
       .then(r => r.json())
       .then(data => {
-        const bots = this.state.bots.filter(b => b.id !== data.bot.id);
-        bots.unshift(data.bot);
-        this.setState({ bots });
-        this.setState({ loading: false });
+        const bots = this.state.bots.filter(b => b.id !== data.bot.id)
+        bots.unshift(data.bot)
+        this.setState({bots})
+        this.setState({loading: false})
       })
       .catch(e => {
-        this.setState({ loading: true });
-      });
+        this.setState({loading: true})
+      })
   }
   renderBot(bot) {
     return (
@@ -77,10 +76,10 @@ class BotsPage extends Component {
           {bot.firstName}
         </div>
       </div>
-    );
+    )
   }
   render() {
-    const { bots, loading } = this.state;
+    const {bots, loading} = this.state
 
     return (
       <div>
@@ -103,77 +102,73 @@ class BotsPage extends Component {
                   disabled={loading}
                 />
               </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={loading}
-              >
+              <button type="submit" className="btn btn-primary" disabled={loading}>
                 Add new bot
               </button>
             </form>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 class ChannelsPage extends Component {
   constructor(props) {
-    super(props);
-    this.state = { botId: null };
+    super(props)
+    this.state = {botId: null}
   }
   onSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!this.state.botId) {
-      return;
+      return
     }
 
     const content = {
       name: this.nameInput.value,
-      botId: this.state.botId
-    };
+      botId: this.state.botId,
+    }
 
-    fetch("/api/addChannel", {
-      method: "POST",
+    fetch('/api/addChannel', {
+      method: 'POST',
       body: JSON.stringify(content),
-      credentials: "include"
+      credentials: 'include',
     })
       .then(r => r.json())
       .then(r => {
         if (!r.ok) {
-          throw new Error(r.error || "Unknown error");
+          throw new Error(r.error || 'Unknown error')
         }
       })
       .catch(e => {
-        alert(e.toString());
-      });
+        alert(e.toString())
+      })
   }
   onBotSelect(e) {
-    this.setState({ botId: e.target.value });
+    this.setState({botId: e.target.value})
   }
   renderChannelLink(channel) {
-    const link = `/channels/${channel.id}`;
+    const link = `/channels/${channel.id}`
     const style = {
-      display: "block"
-    };
+      display: 'block',
+    }
     return (
       <a href={link} style={style}>
         {channel.title}
       </a>
-    );
+    )
   }
   renderBot(bot) {
     return (
       <option value={bot.id}>
         {bot.firstName} (@{bot.username})
       </option>
-    );
+    )
   }
   render() {
-    const bots = INITIAL_DATA.bots || [];
-    const channels = INITIAL_DATA.channels || [];
-    const { botId } = this.state;
+    const bots = INITIAL_DATA.bots || []
+    const channels = INITIAL_DATA.channels || []
+    const {botId} = this.state
 
     return (
       <div>
@@ -181,12 +176,7 @@ class ChannelsPage extends Component {
         <form onSubmit={e => this.onSubmit(e)} className="form">
           <div className="form-group">
             <label>Channel name (with @)</label>
-            <input
-              type="text"
-              className="form-control"
-              required
-              ref={i => (this.nameInput = i)}
-            />
+            <input type="text" className="form-control" required ref={i => (this.nameInput = i)} />
           </div>
           <div className="form-group">
             <label htmlFor="bot">Bot</label>
@@ -207,35 +197,35 @@ class ChannelsPage extends Component {
         <hr />
         {channels.map(c => this.renderChannelLink(c))}
       </div>
-    );
+    )
   }
 }
 
 class NotFoundPage extends Component {
   render() {
-    return <div>NotFound page</div>;
+    return <div>NotFound page</div>
   }
 }
 
 export default class App extends Component {
   render() {
-    let Page = NotFoundPage;
-    let channelId = null;
+    let Page = NotFoundPage
+    let channelId = null
     // for channels page
-    const match = /\/channels\/([a-z0-9]+)/.exec(location.pathname);
+    const match = /\/channels\/([a-z0-9]+)/.exec(location.pathname)
     if (match && match[1]) {
-      channelId = match[1];
-      Page = ChannelPage;
+      channelId = match[1]
+      Page = ChannelPage
     } else {
       Page = {
-        "/bots": BotsPage,
-        "/channels": ChannelsPage,
-        "/": ChannelsPage
-      }[location.pathname];
+        '/bots': BotsPage,
+        '/channels': ChannelsPage,
+        '/': ChannelsPage,
+      }[location.pathname]
     }
 
     if (!Page) {
-      Page = NotFoundPage;
+      Page = NotFoundPage
     }
 
     return (
@@ -245,6 +235,6 @@ export default class App extends Component {
           <Page channelId={channelId} />
         </div>
       </div>
-    );
+    )
   }
 }
