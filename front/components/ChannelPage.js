@@ -46,8 +46,8 @@ export default class ChannelPage extends Component {
       }
       else {
         const newPosts = posts.concat(r.post);
-        this.setState({ posts: newPosts, showMe:true});
-        setTimeout(() => this.setState({showMe: false}), 3000)
+        this.setState({posts:newPosts, showMe:true});
+        setTimeout(() => this.setState({showMe:false}), 3000)
       }
     })
     .catch(e => {
