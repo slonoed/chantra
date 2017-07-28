@@ -1,77 +1,47 @@
 import {Component} from 'react'
-import moment from 'moment'
+import Post from './Post'
+import Alert from './Alert'
 import MessageForm from './MessageForm'
+import {connect} from 'react-redux'
+import {scheduleNewPost} from '../reducers/posts'
 
-class Post extends Component {
-  render() {
-    const {sentDate, text} = this.props.post
-    const date = moment.unix(sentDate).format('YYYY-MM-DD HH:mm');
-    return <div className="panel">
-      <b>{date}</b>
-      <p>{text}</p>
-       <hr/>
-    </div>
-  }
-}
-class Alert extends React.Component {
-  render() {
-    return (
-    <div className="alert" role="alert">
-      <h1>Done!</h1>
-    </div>  
-    ); 
-  }
-}
-export default class ChannelPage extends Component {
-  constructor(props) { 
-    super(props); 
-    const {posts} = INITIAL_DATA
-    this.state = {posts, showMe: false};
-  }
+class ChannelPage extends Component {
   onMessageAdd(message) {
-    const {posts} = this.state
-    const content = Object.assign(message, {
-      sentDate: message.sentDate.unix(),
-      channel_id: this.props.channelId
-    });
-    fetch('/api/addPost', {
-      method: 'POST',
-      body: JSON.stringify(content),
-      credentials: 'include'
-    })
-    .then(r => r.json())
-    .then(r => {
-      if (!r.ok) {
-        throw new Error(r.error || 'Unknown error');
-      }
-      else {
-        const newPosts = posts.concat(r.post);
-        this.setState({posts:newPosts, showMe:true});
-        setTimeout(() => this.setState({showMe:false}), 3000)
-      }
-    })
-    .catch(e => {
-      alert(e.toString());
-    });
+    this.props.scheduleNewPost(message, this.props.channelId)
   }
+
   render() {
     const {channels, bots} = INITIAL_DATA
-    const {channelId} = this.props;
-    const {posts, showMe} = this.state
+    const {channelId, posts} = this.props
     const channel = channels.find(c => c.id === channelId)
     const {title} = channel
-    const filteredPosts = posts.filter(p => p.channel_id === channelId)
-    const byDate = (b, a) => a.sentDate - b.sentDate;
-    return <div>
-      <h2>{title}</h2>
-      <MessageForm
-        bots={bots}
-        onAdd={m => this.onMessageAdd(m)}
-      />
-       {showMe && <Alert/>}
-      <hr/>
-      <h2>Posts</h2>
-      {filteredPosts.sort(byDate).map(p => <Post post={p}/>)}
-    </div>
+    const filteredPosts = Object.values(posts).filter(p => p.channel_id === channelId)
+    const byDate = (b, a) => a.sentDate - b.sentDate
+
+    const columnStyle = {flex: 1}
+
+    return (
+      <div>
+        <h2>
+          {title}
+        </h2>
+        <div className="row">
+          <div className="col-md-6">
+            <MessageForm bots={bots} onAdd={m => this.onMessageAdd(m)} />
+          </div>
+          <div className="col-md-6">
+            <h2>Posts</h2>
+            {filteredPosts.sort(byDate).map(p => <Post key={p.id} post={p} />)}
+          </div>
+        </div>
+      </div>
+    )
   }
 }
+
+const mapStateToProps = state => ({
+  posts: state.posts.posts,
+})
+const mapDispatchToProps = {scheduleNewPost}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelPage)

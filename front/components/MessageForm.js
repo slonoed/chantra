@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
+import FeedbackForm from './FeedbackForm'
 
 export default class MessageForm extends Component {
   constructor(props) {
