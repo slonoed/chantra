@@ -22,7 +22,7 @@ export default class Post extends Component {
           </tr>
         </thead>
         <tbody>
-          {answers.map(a => <Answer answer={a} />)}
+          {answers.map((a, idx) => <Answer key={idx} answer={a} />)}
         </tbody>
       </table>
     )

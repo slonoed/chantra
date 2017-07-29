@@ -5,6 +5,7 @@ import ChannelsPage from './ChannelsPage'
 import Navbar from './Navbar'
 import NotFoundPage from './NotFoundPage'
 import Notifications from './Notifications'
+import BotsPage from './BotsPage'
 
 export default class App extends Component {
   render() {
