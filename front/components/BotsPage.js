@@ -3,7 +3,7 @@ import {Component} from 'react'
 export default class BotsPage extends Component {
   constructor(props) {
     super(props)
-    this.fieldId = 'bots-page-form-input-' + Math.floor(Math.random() * 100000)
+    this.fieldId = `bots-page-form-input-${Math.floor(Math.random() * 100000)}`
     this.state = {
       bots: INITIAL_DATA.bots || [],
       loading: false,

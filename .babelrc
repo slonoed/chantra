@@ -9,6 +9,12 @@
   "env": {
     "production": {
       "presets": ["babili"]
+    },
+    "test": {
+      "presets":[
+        "react"
+      ],
+      "plugins": ["transform-es2015-modules-commonjs"]
     }
   }
 }
