@@ -28,7 +28,7 @@ export default class Post extends Component {
     )
   }
   render() {
-    const {sentDate, text, answers} = this.props.post
+    const {sentDate, text, answers, error} = this.props.post
     const date = moment.unix(sentDate).format('YYYY-MM-DD HH:mm')
     const isNew = moment.unix(this.props.post.sentDate).isAfter(moment().subtract(10, 'seconds'))
 
@@ -47,6 +47,11 @@ export default class Post extends Component {
           {text}
         </p>
         {answers.length > 0 ? this.renderAnswers(answers) : null}
+
+        {error &&
+          <div className="alert alert-danger">
+            {error}
+          </div>}
       </div>
     )
   }

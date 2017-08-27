@@ -37,7 +37,7 @@ export const scheduleNewPost = (post, channelId) => dispatch => {
 
 const initialState = {
   // id -> post
-  posts: INITIAL_DATA.posts.reduce((all, c) => {
+  posts: (INITIAL_DATA.posts || []).reduce((all, c) => {
     all[c.id] = c
     return all
   }, {}),

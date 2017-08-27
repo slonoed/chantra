@@ -52,6 +52,7 @@ func main() {
 	if os.Getenv("GO_ENV") == "development" {
 		env = state.EnvDev
 	}
+
 	appState := &state.AppState{
 		MgoSession:   ms,
 		SessionStore: store,

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
+	"strings"
 
 	"github.com/slonoed/chantra/state"
 	mgo "gopkg.in/mgo.v2"
@@ -29,6 +30,7 @@ type Post struct {
 	WithPreview      bool          `json:"withPreview"`
 	Mode             ParseMode     `json:"parseMode"`
 	Answers          []Answer      `json:"answers"`
+	Error            string        `json:"error"`
 }
 
 func GetPostById(app *state.AppState, id bson.ObjectId) (*Post, error) {
@@ -45,6 +47,11 @@ func GetPostById(app *state.AppState, id bson.ObjectId) (*Post, error) {
 func (post *Post) Save(app *state.AppState) error {
 	session := app.MgoSession.Clone()
 	defer session.Close()
+
+	if post.ID == "" {
+		post.ID = bson.NewObjectId()
+	}
+
 	return session.DB(dbName).C("posts").Insert(post)
 }
 
@@ -95,7 +102,15 @@ func (post *Post) Send(app *state.AppState) error {
 
 	_, err = botAPI.Send(msg)
 	if err != nil {
-		if err := coll.UpdateId(post.ID, bson.M{"$set": bson.M{"isSent": false}}); err != nil {
+		isInvalidSyntax := strings.Contains(err.Error(), "can't parse entities in message text")
+
+		// If syntax incorrect mark as sent to prevent retrying
+		set := bson.M{"isSent": false, "error": ""}
+		if isInvalidSyntax {
+			set = bson.M{"isSent": true, "error": "Invalid markdown syntax"}
+		}
+
+		if err := coll.UpdateId(post.ID, bson.M{"$set": set}); err != nil {
 			log.Println(err)
 		}
 		return err
