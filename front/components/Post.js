@@ -11,6 +11,18 @@ const Answer = ({answer}) =>
     </td>
   </tr>
 
+const Paragraph = ({text}) => {
+  const lines = text.split('\n')
+  const elements = lines
+    .reduce((all, line) => all.concat([line, <br/>]), [])
+  
+  elements.pop()
+
+  return <div>
+    {elements}
+  </div>
+}
+
 export default class Post extends Component {
   renderAnswers(answers) {
     return (
@@ -31,7 +43,6 @@ export default class Post extends Component {
     const {sentDate, text, answers, error} = this.props.post
     const date = moment.unix(sentDate).format('YYYY-MM-DD HH:mm')
     const isNew = moment.unix(this.props.post.sentDate).isAfter(moment().subtract(10, 'seconds'))
-
     const style = {
       backgroundColor: isNew ? '#fffcda' : null,
       borderBottom: '1px solid #ddd',
@@ -44,7 +55,7 @@ export default class Post extends Component {
           {date}
         </b>
         <p>
-          {text}
+          <Paragraph text={text}/>
         </p>
         {answers.length > 0 ? this.renderAnswers(answers) : null}
 
