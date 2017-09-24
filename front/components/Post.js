@@ -1,5 +1,6 @@
 import moment from 'moment'
 import {Component} from 'react'
+import Paragraph from './Paragraph'
 
 const Answer = ({answer}) =>
   <tr>
@@ -10,18 +11,6 @@ const Answer = ({answer}) =>
       {answer.votes}
     </td>
   </tr>
-
-const Paragraph = ({text}) => {
-  const lines = text.split('\n')
-  const elements = lines
-    .reduce((all, line) => all.concat([line, <br/>]), [])
-  
-  elements.pop()
-
-  return <div>
-    {elements}
-  </div>
-}
 
 export default class Post extends Component {
   renderAnswers(answers) {
@@ -55,7 +44,7 @@ export default class Post extends Component {
           {date}
         </b>
         <p>
-          <Paragraph text={text}/>
+          <Paragraph text={text} />
         </p>
         {answers.length > 0 ? this.renderAnswers(answers) : null}
 

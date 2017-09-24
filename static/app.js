@@ -2832,7 +2832,7 @@ object-assign
   function(e, t, a) {
     'use strict'
     var n = a(16),
-      o = a(353),
+      o = a(354),
       d = a(23),
       r = Function.prototype,
       s = Object.prototype,
@@ -2850,8 +2850,8 @@ object-assign
   function(e, t, a) {
     'use strict'
     var n = a(60),
-      o = a(351),
-      d = a(352),
+      o = a(352),
+      d = a(353),
       r = n.a ? n.a.toStringTag : void 0
     t.a = function(e) {
       return null == e
@@ -3396,8 +3396,8 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(389),
-      o = a(392)
+    var n = a(390),
+      o = a(393)
     t.a = function(e, t) {
       var a = Object(o.a)(e, t)
       return Object(n.a)(a) ? a : void 0
@@ -4342,9 +4342,9 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(344),
+    var n = a(345),
       o = a(219),
-      d = a(348)
+      d = a(349)
     a.d(t, 'a', function() {
       return n.a
     }), a.d(t, 'b', function() {
@@ -4363,9 +4363,9 @@ object-assign
   function(e, t, a) {
     'use strict'
     var n = a(220),
-      o = a(357),
-      d = a(358),
-      r = a(359),
+      o = a(358),
+      d = a(359),
+      r = a(360),
       s = a(225),
       i = a(224)
     a.d(t, 'e', function() {
@@ -5808,11 +5808,11 @@ object-assign
         o = a.n(n),
         d = a(336),
         r = a(216),
-        s = a(405),
-        i = a(406),
-        l = a(408),
-        m = a(409),
-        u = a(410)
+        s = a(406),
+        i = a(407),
+        l = a(409),
+        m = a(410),
+        u = a(411)
       class p extends n.Component {
         render() {
           let t = l.a,
@@ -18931,7 +18931,7 @@ object-assign
     }.call(t, a(2)))
   },
   function(e, t, a) {
-    e.exports = a(345)()
+    e.exports = a(346)()
   },
   function(e, t, a) {
     'use strict'
@@ -19130,13 +19130,13 @@ object-assign
         )
       }
     }
-    var l = a(346),
+    var l = a(347),
       m = a.n(l),
       u = a(22),
       p = a.n(u),
       c = a(2),
       h = a.n(c),
-      y = a(347),
+      y = a(348),
       f = a(218),
       M =
         Object.assign ||
@@ -19231,7 +19231,7 @@ object-assign
       return s
     }), (t.b = n)
     var o = a(15),
-      d = a(354),
+      d = a(355),
       r = a.n(d),
       s = {INIT: '@@redux/INIT'}
   },
@@ -19346,7 +19346,7 @@ object-assign
         })
     }
     const l = {
-      posts: INITIAL_DATA.posts.reduce((e, t) => {
+      posts: (INITIAL_DATA.posts || []).reduce((e, t) => {
         return (e[t.id] = t), e
       }, {}),
       form: {loading: !1},
@@ -19373,9 +19373,9 @@ object-assign
     'use strict'
     var n = a(230),
       o = a(231),
-      d = a(399),
+      d = a(400),
       r = a(240),
-      s = a(402)
+      s = a(403)
     a.d(t, 'a', function() {
       return n.a
     }), a.d(t, 'b', function() {
@@ -19413,7 +19413,7 @@ object-assign
     }
     var n = a(61),
       o = a(24),
-      d = a(364),
+      d = a(365),
       r = a(22),
       s = a.n(r)
   },
@@ -19449,8 +19449,8 @@ object-assign
       o = a(15),
       d = a(61),
       r = a(232),
-      s = a(365),
-      i = a(366),
+      s = a(366),
+      i = a(367),
       l = a(22),
       m = a.n(l),
       u = a(240),
@@ -19505,7 +19505,7 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(379),
+    var n = a(380),
       o = a(23),
       d = Object.prototype,
       r = d.hasOwnProperty,
@@ -19525,7 +19525,7 @@ object-assign
     'use strict'
     ;(function(e) {
       var n = a(13),
-        o = a(380),
+        o = a(381),
         d = 'object' == typeof exports && exports && !exports.nodeType && exports,
         r = d && 'object' == typeof e && e && !e.nodeType && e,
         s = r && r.exports === d,
@@ -19537,9 +19537,9 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(382),
-      o = a(383),
-      d = a(384),
+    var n = a(383),
+      o = a(384),
+      d = a(385),
       r = d.a && d.a.isTypedArray,
       s = r ? Object(o.a)(r) : n.a
     t.a = s
@@ -19547,7 +19547,7 @@ object-assign
   function(e, t, a) {
     'use strict'
     var n = a(239),
-      o = a(385),
+      o = a(386),
       d = Object.prototype,
       r = d.hasOwnProperty
     t.a = function(e) {
@@ -19573,8 +19573,8 @@ object-assign
     })
     var n = a(64),
       o = a(24),
-      d = a(386),
-      r = a(397),
+      d = a(387),
+      r = a(398),
       s = a(65),
       i = a(22),
       l = a.n(i),
@@ -19620,7 +19620,7 @@ object-assign
     })
     var o = a(243),
       d = a(66),
-      r = a(401),
+      r = a(402),
       s = a(15),
       i = '/',
       l = function(e) {
@@ -19694,7 +19694,7 @@ object-assign
       var a = n(99),
         d = n(39),
         r = n.n(d),
-        s = n(411),
+        s = n(412),
         i = n(57)
       const l = Object(s.a)()
       Object(d.render)(
@@ -24406,8 +24406,8 @@ object-assign
       var e = a(2),
         o = a.n(e),
         d = a(337),
-        r = a(339),
-        s = a(340),
+        r = a(340),
+        s = a(341),
         i = a(57),
         l = a(228)
       class m extends e.Component {
@@ -24454,15 +24454,16 @@ object-assign
       var e = a(0),
         o = a.n(e),
         d = a(2),
-        r = a.n(d)
-      const s = ({answer: e}) =>
+        r = a.n(d),
+        s = a(339)
+      const i = ({answer: e}) =>
         n.createElement(
           'tr',
           null,
           n.createElement('td', null, e.text),
           n.createElement('td', null, e.votes)
         )
-      class i extends d.Component {
+      class l extends d.Component {
         renderAnswers(e) {
           return n.createElement(
             'table',
@@ -24477,28 +24478,29 @@ object-assign
                 n.createElement('th', null, 'Votes')
               )
             ),
-            n.createElement('tbody', null, e.map((e, t) => n.createElement(s, {key: t, answer: e})))
+            n.createElement('tbody', null, e.map((e, t) => n.createElement(i, {key: t, answer: e})))
           )
         }
         render() {
-          const {sentDate: t, text: a, answers: r} = this.props.post,
-            s = o.a.unix(t).format('YYYY-MM-DD HH:mm'),
-            d = o.a.unix(this.props.post.sentDate).isAfter(o()().subtract(10, 'seconds')),
-            e = {
-              backgroundColor: d ? '#fffcda' : null,
+          const {sentDate: t, text: a, answers: r, error: i} = this.props.post,
+            d = o.a.unix(t).format('YYYY-MM-DD HH:mm'),
+            e = o.a.unix(this.props.post.sentDate).isAfter(o()().subtract(10, 'seconds')),
+            l = {
+              backgroundColor: e ? '#fffcda' : null,
               borderBottom: '1px solid #ddd',
               padding: '5px',
             }
           return n.createElement(
             'div',
-            {style: e},
-            n.createElement('b', null, s),
-            n.createElement('p', null, a),
-            0 < r.length ? this.renderAnswers(r) : null
+            {style: l},
+            n.createElement('b', null, d),
+            n.createElement('p', null, n.createElement(s.a, {text: a})),
+            0 < r.length ? this.renderAnswers(r) : null,
+            i && n.createElement('div', {className: 'alert alert-danger'}, i)
           )
         }
       }
-      t.a = i
+      t.a = l
     }.call(t, a(2)))
   },
   function(e, t, a) {
@@ -24749,6 +24751,16 @@ object-assign
   function(e, t, a) {
     'use strict'
     ;(function(e) {
+      t.a = ({text: t}) => {
+        const a = t.split('\n'),
+          n = a.reduce((t, a) => t.concat([a, e.createElement('br', null)]), [])
+        return n.pop(), e.createElement('div', null, n)
+      }
+    }.call(t, a(2)))
+  },
+  function(e, t, a) {
+    'use strict'
+    ;(function(e) {
       var t = a(2),
         n = a.n(t)
       class o extends t.Component {
@@ -24769,7 +24781,7 @@ object-assign
         o = a.n(e),
         d = a(0),
         r = a.n(d),
-        s = a(341),
+        s = a(342),
         i = a.n(s),
         l = a(216)
       class m extends e.Component {
@@ -24940,7 +24952,7 @@ object-assign
       M = Math.min,
       L = Math.floor
     !(function(o, e) {
-      a.exports = e(n(0), n(2), n(342))
+      a.exports = e(n(0), n(2), n(343))
     })(this, function(a, o, t) {
       return (function(a) {
         function e(n) {
@@ -28640,7 +28652,7 @@ object-assign
       s = a.n(r),
       i = a(39),
       l = a.n(i),
-      m = a(343),
+      m = a(344),
       u = (function() {
         function e(e, t) {
           for (var a = 0, n; a < t.length; a++)
@@ -28889,11 +28901,11 @@ object-assign
       return e === t
     }
     var r = a(219),
-      s = a(349),
-      i = a(350),
-      l = a(360),
-      m = a(361),
-      u = a(362),
+      s = a(350),
+      i = a(351),
+      l = a(361),
+      m = a(362),
+      u = a(363),
       p =
         Object.assign ||
         function(e) {
@@ -29031,13 +29043,13 @@ object-assign
     t.a = o
   },
   function(e, t, a) {
-    e.exports = a(355)
+    e.exports = a(356)
   },
   function(e, t, a) {
     'use strict'
     ;(function(e, n) {
       Object.defineProperty(t, '__esModule', {value: !0})
-      var o = a(356),
+      var o = a(357),
         d = (function(e) {
           return e && e.__esModule ? e : {default: e}
         })(o),
@@ -29300,7 +29312,7 @@ object-assign
       var p = i.pure ? d : o
       return p(l, m, u, e, i)
     }
-    a(363)
+    a(364)
   },
   function(e, t, a) {
     'use strict'
@@ -29320,11 +29332,11 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(367),
+    var n = a(368),
       o = a(63),
       d = a(64),
-      r = a(371),
-      s = a(374),
+      r = a(372),
+      s = a(375),
       i = Math.max
     t.a = function(e, t, a, l) {
       ;(e = Object(o.a)(e) ? e : Object(s.a)(e)), (a = a && !l ? Object(r.a)(a) : 0)
@@ -29336,9 +29348,9 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(368),
-      o = a(369),
-      d = a(370)
+    var n = a(369),
+      o = a(370),
+      d = a(371)
     t.a = function(e, t, a) {
       return t === t ? Object(d.a)(e, t, a) : Object(n.a)(e, o.a, a)
     }
@@ -29365,7 +29377,7 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(372)
+    var n = a(373)
     t.a = function(e) {
       var t = Object(n.a)(e),
         a = t % 1
@@ -29374,7 +29386,7 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(373),
+    var n = a(374),
       o = 1 / 0
     t.a = function(e) {
       if (!e) return 0 === e ? e : 0
@@ -29410,8 +29422,8 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(375),
-      o = a(376)
+    var n = a(376),
+      o = a(377)
     t.a = function(e) {
       return null == e ? [] : Object(n.a)(e, Object(o.a)(e))
     }
@@ -29427,7 +29439,7 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(377),
+    var n = a(378),
       o = a(238),
       d = a(63)
     t.a = function(e) {
@@ -29436,11 +29448,11 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(378),
+    var n = a(379),
       o = a(235),
       d = a(30),
       r = a(236),
-      s = a(381),
+      s = a(382),
       i = a(237),
       l = Object.prototype,
       m = l.hasOwnProperty
@@ -29552,7 +29564,7 @@ object-assign
   function(e, t, a) {
     'use strict'
     var n = a(238),
-      o = a(387),
+      o = a(388),
       d = a(235),
       r = a(30),
       s = a(63),
@@ -29582,11 +29594,11 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(388),
-      o = a(393),
-      d = a(394),
-      r = a(395),
-      s = a(396),
+    var n = a(389),
+      o = a(394),
+      d = a(395),
+      r = a(396),
+      s = a(397),
       i = a(16),
       l = a(241),
       m = '[object Map]',
@@ -29635,7 +29647,7 @@ object-assign
   function(e, t, a) {
     'use strict'
     var n = a(24),
-      o = a(390),
+      o = a(391),
       d = a(62),
       r = a(241),
       s = /[\\^$.*+?()[\]{}|]/g,
@@ -29660,7 +29672,7 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(391),
+    var n = a(392),
       o = (function() {
         var e = /[^.]+$/.exec((n.a && n.a.keys && n.a.keys.IE_PROTO) || '')
         return e ? 'Symbol(src)_1.' + e : ''
@@ -29711,7 +29723,7 @@ object-assign
   },
   function(e, t, a) {
     'use strict'
-    var n = a(398)
+    var n = a(399)
     t.a = function(e) {
       return null == e ? '' : Object(n.a)(e)
     }
@@ -29759,7 +29771,7 @@ object-assign
       }
     }
     var o = a(15),
-      d = a(400),
+      d = a(401),
       r = a.n(d),
       s = a(22),
       i = a.n(s),
@@ -29795,14 +29807,14 @@ object-assign
       o = a(61),
       d = a(15),
       r = a(30),
-      s = a(403),
+      s = a(404),
       i = a(64),
       l = a(24),
       m = a(232),
       u = a(230),
       p = a(22),
       c = a.n(p),
-      h = a(404),
+      h = a(405),
       y = a(242),
       f = (function() {
         function e(e, t) {
@@ -29951,7 +29963,7 @@ object-assign
     ;(function(e) {
       var n = a(2),
         o = a.n(n),
-        d = a(407)
+        d = a(408)
       class r extends n.Component {
         render() {
           return e.createElement(
@@ -29985,8 +29997,9 @@ object-assign
         o = a.n(n)
       class d extends n.Component {
         render() {
-          const {route: t, children: a} = this.props
-          return e.createElement('a', {href: '/' + t}, a)
+          const {route: t, children: a} = this.props,
+            n = `/${t}`
+          return e.createElement('a', {href: n}, a)
         }
       }
       t.a = d
@@ -30028,11 +30041,9 @@ object-assign
         o = a.n(n)
       class d extends n.Component {
         constructor(e) {
-          super(e), (this.fieldId =
-            'bots-page-form-input-' + Math.floor(1e5 * Math.random())), (this.state = {
-            bots: INITIAL_DATA.bots || [],
-            loading: !1,
-          })
+          super(e), (this.fieldId = `bots-page-form-input-${Math.floor(
+            1e5 * Math.random()
+          )}`), (this.state = {bots: INITIAL_DATA.bots || [], loading: !1})
         }
         onSubmit(e) {
           e.preventDefault()
@@ -30110,9 +30121,9 @@ object-assign
       return Object(n.e)(r.a, s(Object(n.a)(d.a)))
     }
     var n = a(59),
-      o = a(412),
+      o = a(413),
       d = a.n(o),
-      r = a(413)
+      r = a(414)
     const s = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || n.d
   },
   function(e, t) {
