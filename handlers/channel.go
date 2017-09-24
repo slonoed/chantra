@@ -38,7 +38,6 @@ func AddChannel(app *state.AppState, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println("WUT")
 	user := r.Context().Value(AuthContextKey("user")).(*models.User)
 	bot, err := models.GetBotById(app, input.BotID)
 	if err != nil {

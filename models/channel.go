@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/slonoed/chantra/state"
@@ -24,10 +25,16 @@ func CreateChannel(app *state.AppState, chat tg.Chat, botID bson.ObjectId) (*Cha
 	session := app.CloneSession()
 	defer session.Close()
 
+	// Avoid duplicates
+	count, _ := session.DB(dbName).C("channels").Find(bson.M{"chat.id": chat.ID}).Count()
+	if count != 0 {
+		return nil, fmt.Errorf("Channel already exist")
+	}
+
 	err := session.DB(dbName).C("channels").Insert(channel)
 	if err != nil {
 		log.Println(err)
-		return nil, err
+		return nil, fmt.Errorf("Server error, try again")
 	}
 
 	return channel, err
